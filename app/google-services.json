@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "622571008044",
+    "project_id": "grocerymanger",
+    "storage_bucket": "grocerymanger.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:622571008044:android:6b2c8b05115fbb3ab7a189",
+        "android_client_info": {
+          "package_name": "com.android.grocerymanger"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7bLjwSb2zA9Iu7QC_bnaY6SLXnrOkF24"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
