@@ -30,6 +30,7 @@ import com.google.android.material.internal.ViewUtils.hideKeyboard
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.GenericTypeIndicator
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStreamWriter
@@ -240,14 +241,15 @@ class MainActivity : AppCompatActivity() {
             }
         )
 
-        // Fetch the existing data and append the new list
+        // Use GenericTypeIndicator to handle the Firebase Map data properly
+        val groceryListRef2 = FirebaseDatabase.getInstance().getReference("grocery_lists").child(userId)
         groceryListRef.get().addOnSuccessListener { dataSnapshot ->
             try {
                 if (dataSnapshot.exists()) {
-                    // Get existing grocery lists from Firebase
-                    val existingData = dataSnapshot.getValue(Map::class.java) // This returns a Map<String, Object>
+                    // Use GenericTypeIndicator to retrieve the data
+                    val groceryListsType = object : GenericTypeIndicator<Map<String, Any>>() {}
+                    val existingData = dataSnapshot.getValue(groceryListsType)
 
-                    // Safe casting of 'groceryLists' to an ArrayList<HashMap<String, Any>>
                     val groceryLists = (existingData?.get("groceryLists") as? ArrayList<HashMap<String, Any>>) ?: arrayListOf()
 
                     // Add the new grocery list to the existing list

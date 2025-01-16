@@ -3,6 +3,8 @@ package com.android.grocerymanger
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,7 +20,20 @@ class GroceryListActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var groceryListAdapter: GroceryTitleListAdapter
-    private var groceryLists: List<GroceryListModel> = emptyList()  // Start with an empty list
+    private var groceryLists: List<GroceryListModel> = emptyList()
+    private lateinit var loadingSpinner: ProgressBar
+
+    // Handle the back button in the ActionBar
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                // Handle the back navigation
+                onBackPressedDispatcher.onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,19 +47,22 @@ class GroceryListActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
+        loadingSpinner = findViewById(R.id.loadingSpinner);
 
         // Initialize the adapter with the empty list
         groceryListAdapter = GroceryTitleListAdapter(groceryLists) { selectedList ->
             // When a grocery list is clicked, navigate to the detail activity
             val intent = Intent(this, GroceryDetailActivity::class.java)
-            intent.putExtra("GROCERY_LIST_ID", selectedList.id)  // Pass the ID or other data
+            intent.putExtra("Grocery_Title", selectedList.title)
             startActivity(intent)
         }
 
         recyclerView.adapter = groceryListAdapter
 
+        loadingSpinner.visibility = ProgressBar.VISIBLE;
         // Fetch data from Firebase
         fetchGroceryLists()
+        loadingSpinner.visibility = ProgressBar.GONE;
     }
 
     private fun fetchGroceryLists() {
