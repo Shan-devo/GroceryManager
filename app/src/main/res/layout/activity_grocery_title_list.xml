@@ -1,4 +1,3 @@
-<!-- grocery_list_item.xml -->
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -11,19 +10,33 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:background="@color/splashColor"
+        android:minHeight="45dp"
+        android:paddingEnd="16dp">
 
+        <!-- TextView for List Title -->
         <TextView
             android:id="@+id/list_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Grocery List Title"
-            android:layout_marginTop="10dp"
+            android:paddingLeft="15dp"
             android:layout_gravity="center"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"/>
+            android:textSize="20sp"
+            android:textColor="@color/white" />
 
-        <!-- Add other details if needed -->
+        <!-- Delete Button (Trash Icon) -->
+        <ImageView
+            android:id="@+id/delete_button"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_delete"
+            android:contentDescription="Delete Item"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"/>
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>

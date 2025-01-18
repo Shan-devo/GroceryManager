@@ -43,6 +43,7 @@ class GroceryDetailActivity : AppCompatActivity() {
             title = "Grocery Lists"
             setDisplayHomeAsUpEnabled(true) // Enable the up button
         }
+        supportActionBar?.setBackgroundDrawable(resources.getDrawable(R.color.splashColor))
 
         groceryListTitle = findViewById(R.id.groceryListTitle)
         groceryListItems = findViewById(R.id.groceryListItems)
